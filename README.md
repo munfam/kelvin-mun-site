@@ -1,4 +1,4 @@
-# kelvin-mun-site
+# munfam
 
 A static personal site and notes archive. Astro builds it to plain HTML;
 Cloudflare Pages serves it from the edge for free.
@@ -39,19 +39,16 @@ The notes index picks it up automatically and sorts by date.
 
 ## Deploying (one-time setup, about 5 minutes)
 
-1. **Push the repo to GitHub.**
-
-   ```bash
-   git remote add origin git@github.com:<your-username>/kelvin-mun-site.git
-   git push -u origin main
-   ```
+1. **The repo is already on GitHub** at
+   `github.com/munfam/kelvin-mun-site`. Clone it anywhere with
+   `git clone https://github.com/munfam/kelvin-mun-site.git`.
 
 2. **Create the Cloudflare Pages project** (the name must match
    `wrangler.toml` and `.github/workflows/deploy.yml`):
 
    ```bash
    npx wrangler login
-   npx wrangler pages project create kelvin-mun-site --production-branch main
+   npx wrangler pages project create munfam --production-branch main
    ```
 
 3. **Create an API token** in the Cloudflare dashboard: *My Profile → API
@@ -66,7 +63,7 @@ The notes index picks it up automatically and sorts by date.
    - `CLOUDFLARE_ACCOUNT_ID`
 
 5. **Push to `main`.** The workflow builds and deploys; the run log prints the
-   live URL (`https://kelvin-mun-site.pages.dev`).
+   live URL (`https://munfam.pages.dev`).
 
 6. **Custom domain (optional)**: *Cloudflare Pages → your project → Custom
    domains*. Point your domain at Cloudflare and TLS is issued automatically.
