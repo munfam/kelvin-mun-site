@@ -1,0 +1,31 @@
+---
+import Base from './Base.astro';
+
+const { frontmatter } = Astro.props;
+const base = import.meta.env.BASE_URL;
+
+const formatDate = (iso: string) =>
+  new Date(iso).toLocaleDateString('en-GB', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+---
+
+<Base title={`${frontmatter.title} — Kelvin Mun`} description={frontmatter.description}>
+  <main class="wrap">
+    <article class="note">
+      <header>
+        <h1>{frontmatter.title}</h1>
+        <div class="note-meta">
+          <time datetime={frontmatter.date}>{formatDate(frontmatter.date)}</time>
+          {frontmatter.tags && <span>{frontmatter.tags.join(' · ')}</span>}
+        </div>
+      </header>
+      <div class="note-body">
+        <slot />
+      </div>
+      <a class="back-link" href={`${base}notes`}>← All notes</a>
+    </article>
+  </main>
+</Base>

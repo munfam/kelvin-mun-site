@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Base
+  title="About — Kelvin Mun"
+  description="Cloud infrastructure, Kubernetes, and building things that run at zero cost."
+>
+  <main class="wrap">
+    <section class="about">
+      <p class="eyebrow">About</p>
+      <h1>Kelvin Mun</h1>
+
+      <div class="about-body">
+        <p class="lede">
+          I work in cloud infrastructure and live in Singapore. Most days that
+          means backup and data protection at scale; the rest of the time it
+          means a Kubernetes lab on a laptop and an unreasonable number of
+          half-finished side projects.
+        </p>
+
+        <p>
+          I write here because the interesting part of infrastructure is rarely
+          the install command. It is what happens six months later, when the free
+          tier expires, the certificate rotates, or the person who set it up has
+          moved on.
+        </p>
+
+        <h2>What I work on</h2>
+        <dl class="fact-grid">
+          <dt>Day job</dt>
+          <dd>Cloud and data protection, Veeam</dd>
+          <dt>Side projects</dt>
+          <dd>Bilingual writing tools for Singapore schools, small web apps, too many Terraform modules</dd>
+          <dt>Stack</dt>
+          <dd>Kubernetes, AWS EKS, Postgres, Python, TypeScript, Astro</dd>
+          <dt>Local setup</dt>
+          <dd>Mac, OrbStack, a k3s cluster that exists purely to be broken</dd>
+        </dl>
+
+        <h2>Elsewhere</h2>
+        <p>
+          <a href="https://github.com/munfam">GitHub</a> ·
+          <a href="https://www.linkedin.com/in/munkelvin/">LinkedIn</a> ·
+          <a href="mailto:kelvin.mun@veeam.com">Email</a>
+        </p>
+      </div>
+    </section>
+  </main>
+</Base>

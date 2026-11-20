@@ -1,0 +1,92 @@
+---
+import Base from '../layouts/Base.astro';
+
+interface Post {
+  frontmatter: { title: string; description?: string; date: string };
+}
+
+const modules = import.meta.glob('/src/pages/notes/*.md', { eager: true }) as Record<
+  string,
+  Post
+>;
+
+const posts = Object.entries(modules)
+  .map(([file, mod]) => {
+    const slug = file.split('/').pop()!.replace('.md', '');
+    return { slug, ...mod.frontmatter };
+  })
+  .sort((a, b) => (a.date < b.date ? 1 : -1));
+
+const formatDate = (iso: string) =>
+  new Date(iso).toLocaleDateString('en-GB', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+
+const recent = posts.slice(0, 3);
+---
+
+<Base
+  title="Kelvin Mun — cloud, cost control, side projects"
+  description="Writing about cloud infrastructure, free tiers that stay free, and building things that run at zero cost."
+>
+  <main class="wrap">
+    <section class="hero">
+      <p class="eyebrow">Singapore</p>
+      <h1>Kelvin Mun</h1>
+      <p class="lede">
+        I work on cloud infrastructure and spend a lot of time on the boring
+        question underneath every project: what does this actually cost to keep
+        running?
+      </p>
+      <p class="lede">
+        Most of what I build runs on free tiers, and most of what I write is
+        about where those free tiers stop being free.
+      </p>
+      <div class="hero-links">
+        <a href="/notes">Read the notes</a>
+        <a href="/about">About me</a>
+        <a href="mailto:kelvin.mun@veeam.com">Email</a>
+      </div>
+    </section>
+
+    <hr />
+
+    <section>
+      <p class="section-label">Recent notes</p>
+      <ul class="note-list">
+        {
+          recent.map((post) => (
+            <li>
+              <time datetime={post.date}>{formatDate(post.date)}</time>
+              <div>
+                <a href={`/notes/${post.slug}/`}>{post.title}</a>
+                {post.description && (
+                  <span class="note-desc">{post.description}</span>
+                )}
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section>
+      <h2>What I'm working on</h2>
+      <ul>
+        <li>
+          A bilingual essay-grading tool for Singapore primary schools, running
+          on Postgres and a hosted model API.
+        </li>
+        <li>
+          Keeping a Kubernetes lab alive on a laptop without paying for a single
+          control plane.
+        </li>
+        <li>
+          A running list of free-tier limits that quietly start charging you.
+        </li>
+      </ul>
+    </section>
+  </main>
+</Base>
